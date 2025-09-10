@@ -1,108 +1,145 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { PlayIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
-import { useLanguage } from '@/contexts/language-context';
-import { FloatingNotes } from '@/components/ui/floating-notes';
+import { ArrowRight, Play } from 'lucide-react';
+import { FloatingParticles } from '@/components/ui/floating-particles';
 import Link from 'next/link';
 
 export function HeroSection() {
-  const { t } = useLanguage();
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <FloatingNotes />
+      <FloatingParticles />
       
-      {/* Background Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/30" />
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-black/20" />
       
-      <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
-        {/* Main Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-6xl md:text-8xl font-bold mb-6"
-        >
-          <span className="gradient-text glow-effect pulse-glow">
-            {t('hero.title')}
-          </span>
-        </motion.h1>
-
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="text-xl md:text-2xl text-yellow-200 mb-4 font-medium"
-        >
-          {t('hero.subtitle')}
-        </motion.p>
-
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="text-lg text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
-        >
-          {t('hero.description')}
-        </motion.p>
-
-        {/* CTA Buttons */}
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-8"
+        >
+          <h1 className="text-6xl md:text-8xl font-light tracking-tight logo-glow mb-4">
+            RaagaRangam
+          </h1>
+          <p className="text-xl md:text-2xl text-slate-300 font-light">
+            Master Carnatic Music Through Technology
+          </p>
+        </motion.div>
+
+        {/* CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mb-16"
         >
           <Link href="/dashboard">
             <motion.button
-              className="btn-primary flex items-center space-x-3 text-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn-primary text-lg px-8 py-4 inline-flex items-center gap-3 shadow-elevated"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <span>{t('hero.cta.primary')}</span>
-              <ArrowRightIcon className="h-5 w-5" />
+              Begin Your Journey
+              <ArrowRight className="w-5 h-5" />
             </motion.button>
           </Link>
-
-          <motion.button
-            className="btn-secondary flex items-center space-x-3 text-lg"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <PlayIcon className="h-5 w-5" />
-            <span>{t('hero.cta.secondary')}</span>
-          </motion.button>
         </motion.div>
 
-        {/* Interactive Demo Preview */}
+        {/* Three Mode Cards */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="mt-16 glass-panel p-8 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="grid md:grid-cols-3 gap-6 mb-16"
+        >
+          {[
+            {
+              title: 'Traditional Mode',
+              description: 'Master authentic finger mappings with customizable gesture controls',
+              icon: '🎵',
+              href: '/play/traditional'
+            },
+            {
+              title: 'One-Hand Virtuoso',
+              description: 'Advanced single-hand techniques for complete swara control',
+              icon: '🤚',
+              href: '/play/onehand'
+            },
+            {
+              title: 'Gamaka Master',
+              description: 'Express complex ornamentations and musical emotions',
+              icon: '🎭',
+              href: '/play/gamaka'
+            }
+          ].map((mode, index) => (
+            <motion.div
+              key={mode.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.0 + index * 0.1 }}
+              whileHover={{ y: -2 }}
+              className="glass-card text-center group cursor-pointer"
+            >
+              <div className="text-4xl mb-4 float-gentle">
+                {mode.icon}
+              </div>
+              <h3 className="text-xl font-medium text-white mb-3">
+                {mode.title}
+              </h3>
+              <p className="text-slate-300 text-sm leading-relaxed mb-4">
+                {mode.description}
+              </p>
+              <Link href={mode.href}>
+                <button className="btn-text text-sm">
+                  Explore Mode →
+                </button>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Mini Demo Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
+          className="glass-card max-w-2xl mx-auto"
         >
           <div className="text-center mb-6">
-            <h3 className="text-2xl font-semibold text-yellow-300 mb-2">Experience RaagaRangam</h3>
-            <p className="text-gray-300">Try our mini gesture recognition demo</p>
+            <h3 className="text-xl font-medium text-white mb-2">
+              Experience Live Demo
+            </h3>
+            <p className="text-slate-300 text-sm">
+              Try our gesture recognition technology
+            </p>
           </div>
           
-          {/* Demo Placeholder - Will be replaced with actual gesture demo */}
-          <div className="bg-black/30 rounded-xl h-64 flex items-center justify-center border border-yellow-400/20">
+          <div className="bg-black/30 rounded-lg h-48 flex items-center justify-center border border-white/5 mb-6">
             <div className="text-center">
               <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
+                animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="text-6xl mb-4"
+                className="text-4xl mb-3"
               >
                 🎵
               </motion.div>
-              <p className="text-yellow-300 font-medium">Mini Demo Coming Soon</p>
-              <p className="text-gray-400 text-sm">Interactive gesture recognition preview</p>
+              <p className="text-slate-400 text-sm">Interactive Demo</p>
             </div>
           </div>
+          
+          <Link href="/play/traditional">
+            <motion.button
+              className="btn-secondary w-full inline-flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+            >
+              <Play className="w-4 h-4" />
+              Try Traditional Mode
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>

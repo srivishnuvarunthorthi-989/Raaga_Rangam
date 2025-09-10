@@ -3,55 +3,84 @@
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { 
-  MusicalNoteIcon, 
-  HandRaisedIcon, 
-  SparklesIcon,
-  TrophyIcon,
-  ChartBarIcon,
-  UserIcon
-} from '@heroicons/react/24/outline';
+  Music, 
+  Hand, 
+  Sparkles,
+  Trophy,
+  TrendingUp,
+  Target,
+  Award
+} from 'lucide-react';
 import { Navbar } from '@/components/layout/navbar';
-import { useLanguage } from '@/contexts/language-context';
 
 const gameModes = [
   {
     id: 'traditional',
-    icon: MusicalNoteIcon,
-    emoji: '🎵',
+    icon: Music,
     title: 'Traditional Mode',
-    description: 'Customizable finger mappings for authentic playing',
-    gradient: 'from-blue-500 to-purple-600',
-    delay: 0.2,
+    description: 'Master authentic finger mappings with customizable gesture controls',
+    accuracy: 94,
+    sessions: 23,
+    bestScore: 1250,
+    gradient: 'from-blue-500/20 to-purple-600/20',
+    border: 'border-blue-500/30',
   },
   {
     id: 'onehand',
-    icon: HandRaisedIcon,
-    emoji: '🤚',
+    icon: Hand,
     title: 'One-Hand Virtuoso',
-    description: 'Master all swaras with single-hand gestures',
-    gradient: 'from-green-500 to-teal-600',
-    delay: 0.4,
+    description: 'Advanced single-hand techniques for complete swara control',
+    accuracy: 87,
+    sessions: 15,
+    bestScore: 980,
+    gradient: 'from-green-500/20 to-teal-600/20',
+    border: 'border-green-500/30',
   },
   {
     id: 'gamaka',
-    icon: SparklesIcon,
-    emoji: '🎭',
+    icon: Sparkles,
     title: 'Gamaka Master',
-    description: 'Advanced ornamentations and expressions',
-    gradient: 'from-orange-500 to-red-600',
-    delay: 0.6,
+    description: 'Express complex ornamentations and musical emotions',
+    accuracy: 91,
+    sessions: 18,
+    bestScore: 1450,
+    gradient: 'from-orange-500/20 to-red-600/20',
+    border: 'border-orange-500/30',
   },
 ];
 
 const statsCards = [
-  { icon: TrophyIcon, label: 'Total Score', value: '12,450', color: 'text-yellow-400' },
-  { icon: ChartBarIcon, label: 'Accuracy', value: '94.2%', color: 'text-green-400' },
-  { icon: MusicalNoteIcon, label: 'Notes Played', value: '2,847', color: 'text-blue-400' },
-  { icon: UserIcon, label: 'Skill Level', value: 'Advanced', color: 'text-purple-400' },
+  { 
+    icon: Trophy, 
+    label: 'Total Score', 
+    value: '12,450', 
+    change: '+12%',
+    color: 'text-amber-400' 
+  },
+  { 
+    icon: Target, 
+    label: 'Accuracy', 
+    value: '94.2%', 
+    change: '+2.1%',
+    color: 'text-green-400' 
+  },
+  { 
+    icon: Music, 
+    label: 'Notes Played', 
+    value: '2,847', 
+    change: '+156',
+    color: 'text-blue-400' 
+  },
+  { 
+    icon: Award, 
+    label: 'Skill Level', 
+    value: 'Advanced', 
+    change: 'Level 8',
+    color: 'text-purple-400' 
+  },
 ];
 
 export default function DashboardPage() {
-  const { t } = useLanguage();
   const router = useRouter();
 
   const handleModeSelect = (modeId: string) => {
@@ -62,18 +91,18 @@ export default function DashboardPage() {
     <div className="min-h-screen">
       <Navbar />
       
-      <main className="container mx-auto px-4 pt-24 pb-8">
-        {/* Welcome Section */}
+      <main className="max-w-7xl mx-auto px-4 pt-24 pb-8">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="mb-8"
         >
-          <h1 className="text-4xl md:text-6xl font-bold gradient-text mb-4">
-            Welcome Back!
+          <h1 className="text-4xl font-light tracking-tight text-white mb-2">
+            Welcome back
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Continue your Carnatic music journey. Choose a mode to start playing.
+          <p className="text-slate-300">
+            Continue your Carnatic music journey
           </p>
         </motion.div>
 
@@ -81,17 +110,30 @@ export default function DashboardPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
+          transition={{ delay: 0.1 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
         >
           {statsCards.map((stat, index) => {
             const IconComponent = stat.icon;
             return (
-              <div key={stat.label} className="glass-panel p-4 text-center">
-                <IconComponent className={`h-8 w-8 mx-auto mb-2 ${stat.color}`} />
-                <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
-              </div>
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + index * 0.05 }}
+                className="glass-card text-center"
+              >
+                <IconComponent className={`h-6 w-6 mx-auto mb-3 ${stat.color}`} />
+                <div className="text-2xl font-medium text-white mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-slate-400 mb-1">
+                  {stat.label}
+                </div>
+                <div className="text-xs text-green-400">
+                  {stat.change}
+                </div>
+              </motion.div>
             );
           })}
         </motion.div>
@@ -100,82 +142,86 @@ export default function DashboardPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mb-12"
+          transition={{ delay: 0.3 }}
+          className="mb-8"
         >
-          <h2 className="text-3xl font-bold text-center mb-8 gradient-text">
+          <h2 className="text-2xl font-medium text-white mb-6">
             Choose Your Mode
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            {gameModes.map((mode) => {
+          <div className="grid md:grid-cols-3 gap-6">
+            {gameModes.map((mode, index) => {
               const IconComponent = mode.icon;
               return (
                 <motion.div
                   key={mode.id}
-                  initial={{ opacity: 0, y: 50 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: mode.delay }}
-                  whileHover={{ scale: 1.05, y: -10 }}
+                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                  whileHover={{ y: -2 }}
                   onClick={() => handleModeSelect(mode.id)}
-                  className="glass-panel p-8 text-center group cursor-pointer relative overflow-hidden"
+                  className={`glass-card cursor-pointer group relative overflow-hidden border ${mode.border}`}
                 >
-                  {/* Background Gradient Effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${mode.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+                  {/* Background Gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${mode.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   
-                  {/* Mode Icon */}
-                  <motion.div
-                    className="relative mb-6"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    <div className="text-6xl mb-4 floating-animation">
-                      {mode.emoji}
-                    </div>
-                    <div className="text-yellow-400 mx-auto">
-                      <IconComponent className="h-8 w-8 mx-auto" />
-                    </div>
-                  </motion.div>
-
-                  {/* Mode Content */}
                   <div className="relative z-10">
-                    <h3 className="text-2xl font-bold text-white mb-4">
+                    {/* Icon */}
+                    <div className="flex items-center justify-between mb-4">
+                      <IconComponent className="h-8 w-8 text-white" />
+                      <div className="text-right">
+                        <div className="text-sm text-slate-400">Best Score</div>
+                        <div className="text-lg font-medium text-white">
+                          {mode.bestScore.toLocaleString()}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <h3 className="text-xl font-medium text-white mb-2">
                       {mode.title}
                     </h3>
-                    <p className="text-gray-300 leading-relaxed mb-6">
+                    <p className="text-slate-300 text-sm leading-relaxed mb-4">
                       {mode.description}
                     </p>
                     
+                    {/* Stats */}
+                    <div className="flex justify-between items-center mb-4">
+                      <div>
+                        <div className="text-xs text-slate-400">Accuracy</div>
+                        <div className="text-sm font-medium text-white">
+                          {mode.accuracy}%
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-slate-400">Sessions</div>
+                        <div className="text-sm font-medium text-white">
+                          {mode.sessions}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Progress Bar */}
+                    <div className="mb-4">
+                      <div className="flex justify-between text-xs text-slate-400 mb-1">
+                        <span>Progress</span>
+                        <span>{mode.accuracy}%</span>
+                      </div>
+                      <div className="w-full bg-slate-700 rounded-full h-1.5">
+                        <div 
+                          className="bg-blue-500 h-1.5 rounded-full transition-all duration-300"
+                          style={{ width: `${mode.accuracy}%` }}
+                        />
+                      </div>
+                    </div>
+                    
                     <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="btn-primary"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="btn-primary w-full"
                     >
                       Play {mode.title}
                     </motion.button>
-                  </div>
-
-                  {/* Hover Effect Particles */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    {[...Array(6)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-2 h-2 bg-yellow-400 rounded-full"
-                        style={{
-                          left: `${20 + i * 15}%`,
-                          top: `${30 + (i % 2) * 20}%`,
-                        }}
-                        animate={{
-                          scale: [0, 1, 0],
-                          opacity: [0, 1, 0],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: i * 0.2,
-                        }}
-                      />
-                    ))}
                   </div>
                 </motion.div>
               );
@@ -187,26 +233,67 @@ export default function DashboardPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="glass-panel p-6 rounded-xl"
+          transition={{ delay: 0.5 }}
+          className="glass-card"
         >
-          <h3 className="text-2xl font-bold text-amber-300 mb-6">Recent Activity</h3>
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-xl font-medium text-white">Recent Activity</h3>
+            <TrendingUp className="w-5 h-5 text-slate-400" />
+          </div>
+          
           <div className="space-y-4">
             {[
-              { mode: 'Traditional', raga: 'Mayamalavagowla', score: 1250, time: '2 hours ago' },
-              { mode: 'One-Hand', raga: 'Mohanam', score: 980, time: '1 day ago' },
-              { mode: 'Gamaka', raga: 'Kalyani', score: 1450, time: '2 days ago' },
+              { 
+                mode: 'Traditional', 
+                raga: 'Mayamalavagowla', 
+                score: 1250, 
+                accuracy: 94,
+                time: '2 hours ago' 
+              },
+              { 
+                mode: 'One-Hand', 
+                raga: 'Mohanam', 
+                score: 980, 
+                accuracy: 87,
+                time: '1 day ago' 
+              },
+              { 
+                mode: 'Gamaka', 
+                raga: 'Kalyani', 
+                score: 1450, 
+                accuracy: 91,
+                time: '2 days ago' 
+              },
             ].map((activity, index) => (
-              <div key={index} className="flex items-center justify-between p-4 bg-white/5 rounded-lg">
-                <div>
-                  <div className="font-semibold text-white">{activity.mode} Mode</div>
-                  <div className="text-sm text-gray-400">Raga: {activity.raga}</div>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 + index * 0.1 }}
+                className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 transition-colors duration-200"
+              >
+                <div className="flex items-center space-x-4">
+                  <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                    <Music className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-white">
+                      {activity.mode} Mode
+                    </div>
+                    <div className="text-sm text-slate-400">
+                      Raga: {activity.raga}
+                    </div>
+                  </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-semibold text-amber-300">{activity.score} pts</div>
-                  <div className="text-sm text-gray-400">{activity.time}</div>
+                  <div className="font-medium text-white">
+                    {activity.score} pts
+                  </div>
+                  <div className="text-sm text-slate-400">
+                    {activity.accuracy}% • {activity.time}
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
