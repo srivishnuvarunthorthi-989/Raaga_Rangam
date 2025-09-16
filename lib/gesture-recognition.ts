@@ -144,18 +144,6 @@ export class GestureRecognition {
     return triggeredSwaras;
   }
 
-  processOneHandMode(results: GestureResult): { swara: string | null, octave: number } {
-    // Implementation for one-hand virtuoso mode
-    // This would detect specific gestures for swaras and octave control
-    return { swara: null, octave: 4 };
-  }
-
-  processGamakaMode(results: GestureResult): { swara: string | null, gamaka: string | null } {
-    // Implementation for gamaka master mode
-    // This would detect ornamentations and expressions
-    return { swara: null, gamaka: null };
-  }
-
   drawLandmarks(
     canvas: HTMLCanvasElement,
     video: HTMLVideoElement,

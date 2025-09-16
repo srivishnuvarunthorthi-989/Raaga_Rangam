@@ -2,7 +2,15 @@
   "name": "raaga-rangam",
   "version": "0.1.0",
   "description": "Interactive Carnatic Music Gaming Platform with gesture recognition and gamification",
-  "keywords": ["carnatic music", "indian classical music", "gesture recognition", "music education", "gamification", "next.js", "typescript"],
+  "keywords": [
+    "carnatic music",
+    "indian classical music",
+    "gesture recognition",
+    "music education",
+    "gamification",
+    "next.js",
+    "typescript"
+  ],
   "author": "RaagaRangam Team",
   "license": "MIT",
   "homepage": "https://github.com/yourusername/raaga-rangam#readme",

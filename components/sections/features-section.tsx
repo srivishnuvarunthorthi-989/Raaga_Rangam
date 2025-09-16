@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/language-context';
 import { HandRaisedIcon, MusicalNoteIcon, SparklesIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 const features = [
   {
@@ -90,13 +91,19 @@ export function FeaturesSection() {
                     {t(`features.${feature.id}.description`)}
                   </p>
                   
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="btn-secondary"
-                  >
-                    Try {t(`features.${feature.id}.title`)}
-                  </motion.button>
+                  <Link href={feature.id === 'traditional' ? '/play/traditional' : '#'}>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="btn-secondary"
+                      onClick={feature.id !== 'traditional' ? (e) => {
+                        e.preventDefault();
+                        alert(`${t(`features.${feature.id}.title`)} coming soon!`);
+                      } : undefined}
+                    >
+                      {feature.id === 'traditional' ? 'Try Traditional Mode' : 'Coming Soon'}
+                    </motion.button>
+                  </Link>
                 </div>
 
                 {/* Hover Effect Particles */}

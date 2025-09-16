@@ -55,7 +55,11 @@ export default function DashboardPage() {
   const router = useRouter();
 
   const handleModeSelect = (modeId: string) => {
-    router.push(`/play/${modeId}`);
+    if (modeId === 'traditional') {
+      router.push('/play/traditional');
+    } else {
+      alert(`${modeId} mode coming soon!`);
+    }
   };
 
   return (

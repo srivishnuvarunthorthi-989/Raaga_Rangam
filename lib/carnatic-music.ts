@@ -16,7 +16,7 @@ export interface Tala {
   name: string;
 }
 
-// Swarasthanas for frequency calculation
+// Swarasthanas for frequency calculation - Enhanced with more variants
 export const swarasthanas: Record<string, Swarasthana> = {
   "Sa": { ratio: 1 },
   "Ri1": { ratio: 16/15 },
@@ -73,22 +73,22 @@ export const ragas: Record<string, Raga> = {
 // Talas (rhythm patterns)
 export const talas: Record<string, Tala> = {
   adi: {
-    name: "Adi Tala",
+    name: "Adi Tala (8 beats)",
     beats: 8,
     pattern: [1, 0, 1, 0, 1, 1, 0, 1]
   },
   rupaka: {
-    name: "Rupaka Tala",
+    name: "Rupaka Tala (6 beats)",
     beats: 6,
     pattern: [1, 0, 1, 1, 0, 1]
   },
   triputa: {
-    name: "Triputa Tala",
+    name: "Triputa Tala (7 beats)",
     beats: 7,
     pattern: [1, 0, 0, 1, 0, 1, 0]
   },
   dhruva: {
-    name: "Dhruva Tala",
+    name: "Dhruva Tala (14 beats)",
     beats: 14,
     pattern: [1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1]
   }
@@ -102,21 +102,34 @@ export const allSwarasWithVariants = [
 
 // Get Raga-specific swara variant
 export function getRagaSpecificSwara(baseSwara: string, ragaSwaras: string[]): string {
+  if (!baseSwara) return baseSwara;
+  
+  const prefix = baseSwara.slice(0, 2);
+  
+  // Sa and Pa don't have variants
+  if (['Sa', 'Pa'].includes(prefix)) return baseSwara;
+  
+  // For Ma, check Ma1 and Ma2
+  if (prefix === 'Ma') {
+    return ragaSwaras.find(s => s.startsWith(prefix)) || baseSwara;
+  }
+  
+  // For Ri, Ga, Da, Ni - check variants in order of preference
   const variantChecks: Record<string, string[]> = {
-    "Ri": ["Ri1", "Ri2", "Ri3"],
-    "Ga": ["Ga1", "Ga2", "Ga3"],
-    "Ma": ["Ma1", "Ma2"],
-    "Da": ["Da1", "Da2", "Da3"],
-    "Ni": ["Ni1", "Ni2", "Ni3"]
+    "Ri": ["Ri3", "Ri2", "Ri1"],
+    "Ga": ["Ga3", "Ga2", "Ga1"],
+    "Da": ["Da3", "Da2", "Da1"],
+    "Ni": ["Ni3", "Ni2", "Ni1"]
   };
 
-  const baseKey = baseSwara.slice(0, 2);
-  if (variantChecks[baseKey]) {
-    for (const variant of variantChecks[baseKey]) {
+  if (variantChecks[prefix]) {
+    for (const variant of variantChecks[prefix]) {
       if (ragaSwaras.includes(variant)) {
         return variant;
       }
     }
   }
-  return baseSwara;
+  
+  // Fallback to any variant that starts with the prefix
+  return ragaSwaras.find(s => s.startsWith(prefix)) || baseSwara;
 }

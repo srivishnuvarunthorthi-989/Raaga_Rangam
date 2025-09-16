@@ -67,14 +67,16 @@ export function HeroSection() {
             </motion.button>
           </Link>
 
-          <motion.button
-            className="btn-secondary flex items-center space-x-3 text-lg"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <PlayIcon className="h-5 w-5" />
-            <span>{t('hero.cta.secondary')}</span>
-          </motion.button>
+          <Link href="/play/traditional">
+            <motion.button
+              className="btn-secondary flex items-center space-x-3 text-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <PlayIcon className="h-5 w-5" />
+              <span>Try Traditional Mode</span>
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Interactive Demo Preview */}
