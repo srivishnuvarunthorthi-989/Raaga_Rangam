@@ -6,6 +6,7 @@ export interface HandLandmark {
   x: number;
   y: number;
   z: number;
+  visibility?: number;
 }
 
 export interface GestureResult {
@@ -160,12 +161,12 @@ export class GestureRecognition {
       const drawingUtils = new DrawingUtils(ctx);
       for (const landmarks of results.landmarks) {
         drawingUtils.drawConnectors(
-          landmarks,
+          landmarks as any,
           HandLandmarker.HAND_CONNECTIONS,
           { color: "rgba(255, 215, 0, 0.4)", lineWidth: 2 }
         );
         drawingUtils.drawLandmarks(
-          landmarks,
+          landmarks as any,
           { color: "rgba(255, 215, 0, 0.8)", radius: 4 }
         );
       }

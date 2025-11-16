@@ -41,7 +41,7 @@ const translations = {
     'hero.description': 'నవీన హస్త సంజ్ఞలు మరియు ఆట రూపంలో భారతీయ శాస్త్రీయ సంగీత అందాలను అనుభవించండి.',
     'hero.cta.primary': 'నేర్చుకోవడం ప్రారంభించండి',
     'hero.cta.secondary': 'ప్రదర్శన చూడండి',
-    
+
     // Features
     'features.traditional.title': 'సాంప్రదాయిక మోడ్',
     'features.traditional.description': 'వాస్తవిక వాయించడం కోసం అనుకూలీకరించదగిన వేలు మ్యాపింగ్‌లు',
@@ -49,6 +49,13 @@ const translations = {
     'features.onehand.description': 'ఒకే చేతి సంజ్ఞలతో అన్ని స్వరాలను నేర్చుకోండి',
     'features.gamaka.title': 'గమక మాస్టర్',
     'features.gamaka.description': 'అధునాతన అలంకారాలు మరియు వ్యక్తీకరణలు',
+
+    // Navigation
+    'nav.dashboard': 'డాష్‌బోర్డ్',
+    'nav.play': 'ప్లే',
+    'nav.leaderboards': 'లీడర్‌బోర్డ్‌లు',
+    'nav.challenges': 'సవాళ్లు',
+    'nav.profile': 'ప్రొఫైల్',
   },
   hi: {
     // Landing Page
@@ -57,7 +64,7 @@ const translations = {
     'hero.description': 'नवाचार हाथ के इशारे नियंत्रण और गेमिफिकेशन के साथ भारतीय शास्त्रीय संगीत की सुंदरता का अनुभव करें।',
     'hero.cta.primary': 'सीखना शुरू करें',
     'hero.cta.secondary': 'डेमो देखें',
-    
+
     // Features
     'features.traditional.title': 'पारंपरिक मोड',
     'features.traditional.description': 'प्रामाणिक बजाने के लिए अनुकूलन योग्य उंगली मैपिंग',
@@ -65,6 +72,13 @@ const translations = {
     'features.onehand.description': 'एक हाथ के इशारों से सभी स्वर सीखें',
     'features.gamaka.title': 'गमक मास्टर',
     'features.gamaka.description': 'उन्नत अलंकरण और अभिव्यक्तियाँ',
+
+    // Navigation
+    'nav.dashboard': 'डैशबोर्ड',
+    'nav.play': 'खेलें',
+    'nav.leaderboards': 'लीडरबोर्ड',
+    'nav.challenges': 'चुनौतियाँ',
+    'nav.profile': 'प्रोफ़ाइल',
   },
 };
 
